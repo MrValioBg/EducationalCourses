@@ -5,7 +5,7 @@ import me.mrvaliobg.software.courses.models.Professor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-@Component("DTOConverter")
+@Component
 public class DTOConverter {
 
     public Course convertDtoToEntity(CourseDTO courseDTO) {
