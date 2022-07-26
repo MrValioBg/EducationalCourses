@@ -1,13 +1,12 @@
 package me.mrvaliobg.software.courses.services;
 
 import lombok.RequiredArgsConstructor;
+import me.mrvaliobg.software.courses.dto.CourseDTO;
+import me.mrvaliobg.software.courses.dto.DTOConverter;
 import me.mrvaliobg.software.courses.exceptions.NoCourseException;
 import me.mrvaliobg.software.courses.models.Course;
-import me.mrvaliobg.software.courses.models.Professor;
-import me.mrvaliobg.software.courses.models.enums.Field;
 import me.mrvaliobg.software.courses.models.enums.Status;
 import me.mrvaliobg.software.courses.repository.CourseRepository;
-import me.mrvaliobg.software.courses.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +16,9 @@ import java.util.List;
 public class CourseService {
 
     private final CourseRepository repository;
-    private final ProfessorRepository professorRepository;
+    private final DTOConverter customerConverter;
 
-    public void updateCourse(final long id, final Course courseRequest) {
+    public void updateCourse(final long id, final CourseDTO courseRequest) {
         final Course course = getCourseById(id);
 
         course.setTitle(courseRequest.getTitle());
@@ -52,12 +51,13 @@ public class CourseService {
     }
 
     public void deleteCourse(final long id) {
-        if(repository.existsById(id)) {
+        if (repository.existsById(id)) {
             repository.deleteById(id);
         } else throw new NoCourseException();
     }
 
-    public void addTask(Course course) {
-        repository.save(course);
+    public void addTask(CourseDTO course) {
+        repository.save(customerConverter.convertDtoToEntity(course));
     }
+
 }

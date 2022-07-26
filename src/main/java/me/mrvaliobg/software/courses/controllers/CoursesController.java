@@ -1,10 +1,12 @@
 package me.mrvaliobg.software.courses.controllers;
 
 import lombok.RequiredArgsConstructor;
+import me.mrvaliobg.software.courses.dto.DTOConverter;
 import me.mrvaliobg.software.courses.models.Course;
-import me.mrvaliobg.software.courses.models.Professor;
+import me.mrvaliobg.software.courses.dto.CourseDTO;
 import me.mrvaliobg.software.courses.models.enums.Status;
 import me.mrvaliobg.software.courses.services.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,12 +31,12 @@ public class CoursesController {
     }
 
     @PostMapping("/")
-    public void addCourse(@RequestBody final Course course) {
+    public void addCourse(@RequestBody final CourseDTO course) {
         courseService.addTask(course);
     }
 
     @PutMapping(path = "{id}")
-    public void updateCourse(@PathVariable final long id, @RequestBody final Course course) {
+    public void updateCourse(@PathVariable final long id, @RequestBody final CourseDTO course) {
         courseService.updateCourse(id, course);
     }
 
