@@ -35,17 +35,17 @@ public class CoursesController {
 
     @PutMapping(path = "{id}")
     public void editCourse(@PathVariable final long id, @RequestBody final CourseDTO course) {
-        service.updateCourse(id, course);
+        service.updateProfessor(id, course);
     }
 
     @PutMapping(path = "{id}/status/{status}")
     public void updateStatus(@PathVariable final long id, @PathVariable final Status status) {
-        service.updateCourse(id, status);
+        service.updateStatus(id, status);
     }
 
     @PutMapping(path = "{id}/professor/{professor_id}")
     public void updateProfessor(@PathVariable final long id, @PathVariable final long professor_id) {
-        service.updateCourse(id, professor_id);
+        service.updateProfessor(id, professor_id);
     }
 
     @DeleteMapping(path = "{id}")

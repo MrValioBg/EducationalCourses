@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import me.mrvaliobg.software.courses.dto.CourseDTO;
 import me.mrvaliobg.software.courses.dto.DTOConverter;
 import me.mrvaliobg.software.courses.exceptions.NoCourseException;
-import me.mrvaliobg.software.courses.exceptions.NoProfessorException;
 import me.mrvaliobg.software.courses.models.Course;
 import me.mrvaliobg.software.courses.models.enums.Status;
 import me.mrvaliobg.software.courses.repository.CourseRepository;
-import me.mrvaliobg.software.courses.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +19,7 @@ public class CourseService {
     private final ProfessorService professorService;
     private final DTOConverter customerConverter;
 
-    public void updateCourse(final long id, final CourseDTO courseRequest) {
+    public void updateProfessor(final long id, final CourseDTO courseRequest) {
         final Course course = getCourseById(id);
 
         course.setTitle(courseRequest.getTitle());
@@ -33,13 +31,14 @@ public class CourseService {
         repository.save(course);
     }
 
-    public void updateCourse(final long id, final Status status) {
+    public void updateStatus(final long id, final Status status) {
         final Course course = getCourseById(id);
+
         course.setStatus(status);
         repository.save(course);
     }
 
-    public void updateCourse(final long id, final long professorId) {
+    public void updateProfessor(final long id, final long professorId) {
         final Course course = getCourseById(id);
 
         course.setProfessor(professorService.getProfessorById(professorId));
