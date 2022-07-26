@@ -36,4 +36,10 @@ public class ProfessorService {
         Professor professor = repository.findById(id).orElseThrow(NoProfessorException::new);
         return professor.getCourses();
     }
+
+    public void deleteProfessor(long id) {
+        if(repository.existsById(id)) {
+            repository.deleteById(id);
+        } else throw new NoProfessorException();
+    }
 }

@@ -37,4 +37,8 @@ public class ProfessorsController {
         return service.getCourses(id);
     }
 
+    @DeleteMapping(path = "{id}")
+    public void deleteCourseById(@PathVariable final long id) {
+        service.deleteProfessor(id);
+    }
 }

@@ -49,7 +49,7 @@ public class CoursesController {
     }
 
     @DeleteMapping(path = "{id}")
-    public void deleteTaskById(@PathVariable final long id) {
+    public void deleteCourseById(@PathVariable final long id) {
         service.deleteCourse(id);
     }
 }
