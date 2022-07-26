@@ -28,7 +28,7 @@ public class Course {
     private Field field;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private Professor professor;
 
 }
