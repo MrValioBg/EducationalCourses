@@ -3,9 +3,11 @@ package me.mrvaliobg.software.courses.controllers;
 import lombok.RequiredArgsConstructor;
 import me.mrvaliobg.software.courses.dto.ProfessorDTO;
 import me.mrvaliobg.software.courses.models.Course;
+import me.mrvaliobg.software.courses.models.Professor;
 import me.mrvaliobg.software.courses.services.ProfessorService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -14,6 +16,12 @@ import java.util.Set;
 public class ProfessorsController {
 
     private final ProfessorService service;
+
+    @GetMapping(path = "all")
+    @CrossOrigin
+    public List<Professor> getAllProfessors() {
+        return service.getAllProfessors();
+    }
 
     @PostMapping("/")
     public void addProfessor(@RequestBody final ProfessorDTO professorDTO) {

@@ -9,6 +9,7 @@ import me.mrvaliobg.software.courses.models.Professor;
 import me.mrvaliobg.software.courses.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -41,5 +42,9 @@ public class ProfessorService {
         if(repository.existsById(id)) {
             repository.deleteById(id);
         } else throw new NoProfessorException();
+    }
+
+    public List<Professor> getAllProfessors() {
+        return repository.findAll();
     }
 }
