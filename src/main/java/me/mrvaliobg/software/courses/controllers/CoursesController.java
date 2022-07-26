@@ -14,42 +14,42 @@ import java.util.List;
 @RequestMapping("api/courses")
 public class CoursesController {
 
-    private final CourseService courseService;
+    private final CourseService service;
 
     @GetMapping("/")
     @CrossOrigin(origins = "localhost:8080")
     public List<Course> getAllCourses() {
-        return courseService.getAllCourses();
+        return service.getAllCourses();
     }
 
     @GetMapping(path = "{id}")
     @CrossOrigin
     public Course getCourseById(@PathVariable final long id) {
-        return courseService.getCourseById(id);
+        return service.getCourseById(id);
     }
 
     @PostMapping("/")
     public void addCourse(@RequestBody final CourseDTO course) {
-        courseService.addCourse(course);
+        service.addCourse(course);
     }
 
     @PutMapping(path = "{id}")
-    public void updateCourse(@PathVariable final long id, @RequestBody final CourseDTO course) {
-        courseService.updateCourse(id, course);
+    public void editCourse(@PathVariable final long id, @RequestBody final CourseDTO course) {
+        service.updateCourse(id, course);
     }
 
     @PutMapping(path = "{id}/{status}")
-    public void updateCourse(@PathVariable final long id, @PathVariable final Status status) {
-        courseService.updateCourse(id, status);
+    public void updateStatus(@PathVariable final long id, @PathVariable final Status status) {
+        service.updateCourse(id, status);
     }
 
     @PutMapping(path = "{id}/{professor_id}")
-    public void updateCourse(@PathVariable final long id, @PathVariable final long professor_id) {
-        courseService.updateCourse(id, professor_id);
+    public void updateProfessor(@PathVariable final long id, @PathVariable final long professor_id) {
+        service.updateCourse(id, professor_id);
     }
 
     @DeleteMapping(path = "{id}")
     public void deleteTaskById(@PathVariable final long id) {
-        courseService.deleteCourse(id);
+        service.deleteCourse(id);
     }
 }

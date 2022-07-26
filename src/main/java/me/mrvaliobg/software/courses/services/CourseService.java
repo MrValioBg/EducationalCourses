@@ -18,7 +18,7 @@ import java.util.List;
 public class CourseService {
 
     private final CourseRepository repository;
-    private final ProfessorRepository professorRepository;
+    private final ProfessorService professorService;
     private final DTOConverter customerConverter;
 
     public void updateCourse(final long id, final CourseDTO courseRequest) {
@@ -42,8 +42,7 @@ public class CourseService {
     public void updateCourse(final long id, final long professorId) {
         final Course course = getCourseById(id);
 
-        course.setProfessor(professorRepository.findById(professorId)
-                .orElseThrow(NoProfessorException::new));
+        course.setProfessor(professorService.getProfessorById(professorId));
         repository.save(course);
     }
 
