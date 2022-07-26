@@ -30,7 +30,7 @@ public class CoursesController {
 
     @PostMapping("/")
     public void addCourse(@RequestBody final CourseDTO course) {
-        courseService.addTask(course);
+        courseService.addCourse(course);
     }
 
     @PutMapping(path = "{id}")

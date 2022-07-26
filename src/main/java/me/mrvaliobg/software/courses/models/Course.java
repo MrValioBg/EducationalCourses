@@ -23,11 +23,11 @@ public class Course {
     private String description;
 
     private Status status;
-    private AttendingType type;
+    private AttendingType attendingType;
     private Field field;
 
-    @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id",referencedColumnName = "id")
     private Professor professor;
 
 }

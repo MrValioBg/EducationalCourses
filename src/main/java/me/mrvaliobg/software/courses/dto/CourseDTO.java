@@ -12,7 +12,7 @@ public class CourseDTO {
     private String title;
     private String description;
     private Status status;
-    private AttendingType type;
+    private AttendingType attendingType;
     private Field field;
     private Professor professor;
 }

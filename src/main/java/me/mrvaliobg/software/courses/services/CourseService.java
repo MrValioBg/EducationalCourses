@@ -29,7 +29,7 @@ public class CourseService {
         course.setStatus(courseRequest.getStatus());
 
         course.setField(courseRequest.getField());
-        course.setProfessor(courseRequest.getProfessor());
+
         repository.save(course);
     }
 
@@ -61,7 +61,7 @@ public class CourseService {
         } else throw new NoCourseException();
     }
 
-    public void addTask(CourseDTO course) {
+    public void addCourse(CourseDTO course) {
         repository.save(customerConverter.convertDtoToEntity(course));
     }
 
