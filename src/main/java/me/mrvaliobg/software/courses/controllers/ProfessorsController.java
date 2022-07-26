@@ -17,7 +17,7 @@ public class ProfessorsController {
 
     private final ProfessorService service;
 
-    @GetMapping(path = "all")
+    @GetMapping(path = "/")
     @CrossOrigin
     public List<Professor> getAllProfessors() {
         return service.getAllProfessors();
@@ -35,8 +35,8 @@ public class ProfessorsController {
 
     @GetMapping(path = "{id}")
     @CrossOrigin
-    public void getProfessorById(@PathVariable final long id) {
-        service.getProfessorById(id);
+    public Professor getProfessorById(@PathVariable final long id) {
+        return service.getProfessorById(id);
     }
 
     @GetMapping(path="{id}/courses")

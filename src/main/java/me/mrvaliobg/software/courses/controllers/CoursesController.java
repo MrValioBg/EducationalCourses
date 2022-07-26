@@ -38,12 +38,12 @@ public class CoursesController {
         service.updateCourse(id, course);
     }
 
-    @PutMapping(path = "{id}/{status}")
+    @PutMapping(path = "{id}/status/{status}")
     public void updateStatus(@PathVariable final long id, @PathVariable final Status status) {
         service.updateCourse(id, status);
     }
 
-    @PutMapping(path = "{id}/{professor_id}")
+    @PutMapping(path = "{id}/professor/{professor_id}")
     public void updateProfessor(@PathVariable final long id, @PathVariable final long professor_id) {
         service.updateCourse(id, professor_id);
     }
