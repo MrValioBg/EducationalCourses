@@ -1,12 +1,10 @@
 package me.mrvaliobg.software.courses.controllers;
 
 import lombok.RequiredArgsConstructor;
-import me.mrvaliobg.software.courses.dto.DTOConverter;
-import me.mrvaliobg.software.courses.models.Course;
 import me.mrvaliobg.software.courses.dto.CourseDTO;
+import me.mrvaliobg.software.courses.models.Course;
 import me.mrvaliobg.software.courses.models.enums.Status;
 import me.mrvaliobg.software.courses.services.CourseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

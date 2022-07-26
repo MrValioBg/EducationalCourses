@@ -1,21 +1,24 @@
 package me.mrvaliobg.software.courses.services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import me.mrvaliobg.software.courses.dto.CourseDTO;
 import me.mrvaliobg.software.courses.dto.DTOConverter;
 import me.mrvaliobg.software.courses.exceptions.NoCourseException;
+import me.mrvaliobg.software.courses.exceptions.NoProfessorException;
 import me.mrvaliobg.software.courses.models.Course;
 import me.mrvaliobg.software.courses.models.enums.Status;
 import me.mrvaliobg.software.courses.repository.CourseRepository;
+import me.mrvaliobg.software.courses.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 public class CourseService {
 
     private final CourseRepository repository;
+    private final ProfessorRepository professorRepository;
     private final DTOConverter customerConverter;
 
     public void updateCourse(final long id, final CourseDTO courseRequest) {
@@ -39,6 +42,8 @@ public class CourseService {
     public void updateCourse(final long id, final long professorId) {
         final Course course = getCourseById(id);
 
+        course.setProfessor(professorRepository.findById(professorId)
+                .orElseThrow(NoProfessorException::new));
         repository.save(course);
     }
 

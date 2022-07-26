@@ -1,8 +1,6 @@
 package me.mrvaliobg.software.courses.models;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import me.mrvaliobg.software.courses.models.enums.AttendingType;
 import me.mrvaliobg.software.courses.models.enums.Field;
 import me.mrvaliobg.software.courses.models.enums.Status;
@@ -11,7 +9,8 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "courses")
 public class Course {
