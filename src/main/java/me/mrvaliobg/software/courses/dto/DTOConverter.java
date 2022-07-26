@@ -18,6 +18,4 @@ public class DTOConverter {
         return modelMapper.map(professorDTO, Professor.class);
     }
 
-
-
 }
