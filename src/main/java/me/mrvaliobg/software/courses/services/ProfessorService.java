@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import me.mrvaliobg.software.courses.dto.DTOConverter;
 import me.mrvaliobg.software.courses.dto.ProfessorDTO;
 import me.mrvaliobg.software.courses.exceptions.NoProfessorException;
+import me.mrvaliobg.software.courses.models.Course;
 import me.mrvaliobg.software.courses.models.Professor;
 import me.mrvaliobg.software.courses.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -27,5 +30,10 @@ public class ProfessorService {
         professor.setFirstName(professorDTO.getFirstName());
         professor.setFirstName(professorDTO.getLastName());
         professor.setCourses(professorDTO.getCourses());
+    }
+
+    public Set<Course> getCourses(long id) {
+        Professor professor = repository.findById(id).orElseThrow(NoProfessorException::new);
+        return professor.getCourses();
     }
 }

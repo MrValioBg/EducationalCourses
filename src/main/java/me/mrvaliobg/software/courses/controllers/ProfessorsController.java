@@ -2,8 +2,11 @@ package me.mrvaliobg.software.courses.controllers;
 
 import lombok.RequiredArgsConstructor;
 import me.mrvaliobg.software.courses.dto.ProfessorDTO;
+import me.mrvaliobg.software.courses.models.Course;
 import me.mrvaliobg.software.courses.services.ProfessorService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,5 +31,10 @@ public class ProfessorsController {
         service.getProfessorById(id);
     }
 
+    @GetMapping(path="{id}/courses")
+    @CrossOrigin
+    public Set<Course> getCourses(@PathVariable final long id) {
+        return service.getCourses(id);
+    }
 
 }
