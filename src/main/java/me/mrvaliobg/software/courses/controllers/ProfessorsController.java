@@ -17,7 +17,7 @@ public class ProfessorsController {
 
     private final ProfessorService service;
 
-    @ApiOperation(value = "Gets a list of all the Professors in the database.", tags = "getAllProfessors")
+    @ApiOperation(value = "Gets a list of all the Professors in the database.")
     @GetMapping(path = "/")
     @CrossOrigin
     public List<ProfessorDTO> getAllProfessors() {
@@ -25,33 +25,33 @@ public class ProfessorsController {
     }
 
 
-    @ApiOperation(value = "Adds a new Professor entity.", tags = "addProfessor")
+    @ApiOperation(value = "Adds a new Professor entity.")
     @PostMapping("/")
     public void addProfessor(@RequestBody final ProfessorDTO professorDTO) {
         service.addProfessor(professorDTO);
     }
 
-    @ApiOperation(value = "Updates the selected professor.", tags = "updateProfessor")
+    @ApiOperation(value = "Updates the selected professor.")
     @PutMapping(path = "{id}")
     public void updateProfessor(@PathVariable final long id, @RequestBody final ProfessorDTO professorDTO) {
         service.updateProfessor(id, professorDTO);
     }
 
-    @ApiOperation(value = "Gets specific Professor by id.", response = CourseDTO.class, tags = "deleteCourseById")
+    @ApiOperation(value = "Gets specific Professor by id.", response = CourseDTO.class)
     @GetMapping(path = "{id}")
     @CrossOrigin
     public ProfessorDTO getProfessorById(@PathVariable final long id) {
         return service.getProfessorDTOById(id);
     }
 
-    @ApiOperation(value = "Gets all of the courses the Professor is assigned to.", response = CourseDTO.class, tags = "deleteCourseById")
+    @ApiOperation(value = "Gets all of the courses the Professor is assigned to.")
     @GetMapping(path="{id}/courses")
     @CrossOrigin
     public Set<CourseDTO> getCourses(@PathVariable final long id) {
         return service.getCourses(id);
     }
 
-    @ApiOperation(value = "Deletes specific Course by its id.", tags = "deleteCourseById")
+    @ApiOperation(value = "Deletes specific Course by its id.")
     @DeleteMapping(path = "{id}")
     public void deleteCourseById(@PathVariable final long id) {
         service.deleteProfessor(id);
