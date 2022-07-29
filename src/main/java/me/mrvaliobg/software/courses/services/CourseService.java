@@ -36,13 +36,14 @@ public class CourseService {
         return repository.findById(id).orElseThrow(NoCourseException::new);
     }
 
-    public void updateProfessor(final long id, final CourseDTO courseRequest) {
+    public void updateCourse(final long id, final CourseDTO courseRequest) {
         final Course course = getCourseById(id);
 
         course.setTitle(courseRequest.getTitle());
         course.setDescription(courseRequest.getDescription());
         course.setStatus(courseRequest.getStatus());
         course.setField(courseRequest.getField());
+        course.setAttendingType(courseRequest.getAttendingType());
 
         repository.save(course);
     }
