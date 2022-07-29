@@ -2,7 +2,6 @@ package me.mrvaliobg.software.courses.controllers;
 
 import lombok.RequiredArgsConstructor;
 import me.mrvaliobg.software.courses.dto.CourseDTO;
-import me.mrvaliobg.software.courses.models.Course;
 import me.mrvaliobg.software.courses.models.enums.Status;
 import me.mrvaliobg.software.courses.services.CourseService;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +15,21 @@ public class CoursesController {
 
     private final CourseService service;
 
+    @PostMapping("/")
+    public void addCourse(@RequestBody final CourseDTO course) {
+        service.addCourse(course);
+    }
+
     @GetMapping("/")
-    @CrossOrigin(origins = "localhost:8080")
-    public List<Course> getAllCourses() {
+    @CrossOrigin
+    public List<CourseDTO> getAllCourses() {
         return service.getAllCourses();
     }
 
     @GetMapping(path = "{id}")
     @CrossOrigin
-    public Course getCourseById(@PathVariable final long id) {
-        return service.getCourseById(id);
-    }
-
-    @PostMapping("/")
-    public void addCourse(@RequestBody final CourseDTO course) {
-        service.addCourse(course);
+    public CourseDTO getCourseById(@PathVariable final long id) {
+        return service.getCourseDTOById(id);
     }
 
     @PutMapping(path = "{id}")

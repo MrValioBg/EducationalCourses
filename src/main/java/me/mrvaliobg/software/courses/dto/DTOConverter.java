@@ -8,6 +8,15 @@ import org.springframework.stereotype.Component;
 @Component("DTOConverter")
 public class DTOConverter {
 
+    public CourseDTO convertEntityToDTO(Course course) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(course, CourseDTO.class);
+    }
+
+    public ProfessorDTO convertEntityToDTO(Professor professor) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(professor, ProfessorDTO.class);
+    }
     public Course convertDtoToEntity(CourseDTO courseDTO) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(courseDTO, Course.class);

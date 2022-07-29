@@ -1,11 +1,15 @@
 package me.mrvaliobg.software.courses.models;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import me.mrvaliobg.software.courses.models.enums.AttendingType;
 import me.mrvaliobg.software.courses.models.enums.Field;
 import me.mrvaliobg.software.courses.models.enums.Status;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -18,6 +22,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull(message = "Title cannot be null")
     private String title;
     @Column(length = 1000)
     private String description;

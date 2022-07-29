@@ -10,6 +10,7 @@ import me.mrvaliobg.software.courses.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -17,7 +18,23 @@ public class CourseService {
 
     private final CourseRepository repository;
     private final ProfessorService professorService;
-    private final DTOConverter customerConverter;
+    private final DTOConverter dtoConverter;
+
+    public void addCourse(CourseDTO course) {
+        repository.save(dtoConverter.convertDtoToEntity(course));
+    }
+
+    public CourseDTO getCourseDTOById(final long id) {
+        return dtoConverter.convertEntityToDTO(repository.findById(id).orElseThrow(NoCourseException::new));
+    }
+
+    public List<CourseDTO> getAllCourses() {
+        return repository.findAll().stream().map(dtoConverter::convertEntityToDTO).collect(Collectors.toList());
+    }
+
+    private Course getCourseById(final long id) {
+        return repository.findById(id).orElseThrow(NoCourseException::new);
+    }
 
     public void updateProfessor(final long id, final CourseDTO courseRequest) {
         final Course course = getCourseById(id);
@@ -25,7 +42,6 @@ public class CourseService {
         course.setTitle(courseRequest.getTitle());
         course.setDescription(courseRequest.getDescription());
         course.setStatus(courseRequest.getStatus());
-
         course.setField(courseRequest.getField());
 
         repository.save(course);
@@ -33,34 +49,20 @@ public class CourseService {
 
     public void updateStatus(final long id, final Status status) {
         final Course course = getCourseById(id);
-
         course.setStatus(status);
         repository.save(course);
     }
 
     public void updateProfessor(final long id, final long professorId) {
         final Course course = getCourseById(id);
-
         course.setProfessor(professorService.getProfessorById(professorId));
         repository.save(course);
-    }
-
-    public Course getCourseById(final long id) {
-        return repository.findById(id).orElseThrow(NoCourseException::new);
-    }
-
-    public List<Course> getAllCourses() {
-        return repository.findAll();
     }
 
     public void deleteCourse(final long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
         } else throw new NoCourseException();
-    }
-
-    public void addCourse(CourseDTO course) {
-        repository.save(customerConverter.convertDtoToEntity(course));
     }
 
 }

@@ -1,9 +1,8 @@
 package me.mrvaliobg.software.courses.controllers;
 
 import lombok.RequiredArgsConstructor;
+import me.mrvaliobg.software.courses.dto.CourseDTO;
 import me.mrvaliobg.software.courses.dto.ProfessorDTO;
-import me.mrvaliobg.software.courses.models.Course;
-import me.mrvaliobg.software.courses.models.Professor;
 import me.mrvaliobg.software.courses.services.ProfessorService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ public class ProfessorsController {
 
     @GetMapping(path = "/")
     @CrossOrigin
-    public List<Professor> getAllProfessors() {
+    public List<ProfessorDTO> getAllProfessors() {
         return service.getAllProfessors();
     }
 
@@ -35,13 +34,13 @@ public class ProfessorsController {
 
     @GetMapping(path = "{id}")
     @CrossOrigin
-    public Professor getProfessorById(@PathVariable final long id) {
-        return service.getProfessorById(id);
+    public ProfessorDTO getProfessorById(@PathVariable final long id) {
+        return service.getProfessorDTOById(id);
     }
 
     @GetMapping(path="{id}/courses")
     @CrossOrigin
-    public Set<Course> getCourses(@PathVariable final long id) {
+    public Set<CourseDTO> getCourses(@PathVariable final long id) {
         return service.getCourses(id);
     }
 
