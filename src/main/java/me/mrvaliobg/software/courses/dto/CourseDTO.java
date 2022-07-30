@@ -6,9 +6,12 @@ import me.mrvaliobg.software.courses.models.enums.AttendingType;
 import me.mrvaliobg.software.courses.models.enums.Field;
 import me.mrvaliobg.software.courses.models.enums.Status;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 public class CourseDTO {
     private long id;
+    @NotNull(message = "Title cannot be null")
     private String title;
     private String description;
     private Status status;

@@ -9,7 +9,6 @@ import me.mrvaliobg.software.courses.models.enums.Field;
 import me.mrvaliobg.software.courses.models.enums.Status;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -18,11 +17,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "courses")
 public class Course {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull(message = "Title cannot be null")
     private String title;
     @Column(length = 1000)
     private String description;
@@ -32,7 +31,7 @@ public class Course {
     private Field field;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teacher_id",referencedColumnName = "id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Professor professor;
 
 }
