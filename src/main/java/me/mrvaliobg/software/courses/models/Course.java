@@ -1,5 +1,6 @@
 package me.mrvaliobg.software.courses.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,7 @@ public class Course {
     private Status status;
     private AttendingType attendingType;
     private Field field;
-
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Professor professor;
