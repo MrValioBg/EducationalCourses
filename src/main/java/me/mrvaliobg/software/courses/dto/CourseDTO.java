@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class CourseDTO {
+
     private long id;
     @NotNull(message = "Title cannot be null")
     private String title;

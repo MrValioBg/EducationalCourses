@@ -24,14 +24,12 @@ public class CoursesController {
 
     @ApiOperation(value = "Gets a list of all the Courses in the database.")
     @GetMapping("/")
-    @CrossOrigin
     public List<CourseDTO> getAllCourses() {
         return service.getAllCourses();
     }
 
     @ApiOperation(value = "Gets specific Course by id.")
     @GetMapping(path = "{id}")
-    @CrossOrigin
     public CourseDTO getCourseById(@PathVariable final long id) {
         return service.getCourseDTOById(id);
     }

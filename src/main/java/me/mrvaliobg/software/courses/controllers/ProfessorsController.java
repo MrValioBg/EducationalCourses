@@ -19,7 +19,6 @@ public class ProfessorsController {
 
     @ApiOperation(value = "Gets a list of all the Professors in the database.")
     @GetMapping(path = "/")
-    @CrossOrigin
     public List<ProfessorDTO> getAllProfessors() {
         return service.getAllProfessors();
     }
@@ -39,21 +38,19 @@ public class ProfessorsController {
 
     @ApiOperation(value = "Gets specific Professor by id.", response = CourseDTO.class)
     @GetMapping(path = "{id}")
-    @CrossOrigin
     public ProfessorDTO getProfessorById(@PathVariable final long id) {
         return service.getProfessorDTOById(id);
     }
 
     @ApiOperation(value = "Gets all of the courses the Professor is assigned to.")
     @GetMapping(path="{id}/courses")
-    @CrossOrigin
     public Set<CourseDTO> getCourses(@PathVariable final long id) {
         return service.getCourses(id);
     }
 
     @ApiOperation(value = "Deletes specific Course by its id.")
     @DeleteMapping(path = "{id}")
-    public void deleteCourseById(@PathVariable final long id) {
+    public void deleteProfessorById(@PathVariable final long id) {
         service.deleteProfessor(id);
     }
 }
