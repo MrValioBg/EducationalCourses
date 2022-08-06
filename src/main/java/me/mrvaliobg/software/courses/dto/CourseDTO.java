@@ -14,6 +14,7 @@ public class CourseDTO {
     private long id;
     @NotNull(message = "Title cannot be null")
     private String title;
+    @NotNull(message = "Description cannot be null")
     private String description;
     private Status status;
     private AttendingType attendingType;
