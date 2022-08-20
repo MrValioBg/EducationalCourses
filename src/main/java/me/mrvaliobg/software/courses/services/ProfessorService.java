@@ -5,7 +5,9 @@ import me.mrvaliobg.software.courses.dto.CourseDTO;
 import me.mrvaliobg.software.courses.dto.DTOConverter;
 import me.mrvaliobg.software.courses.dto.ProfessorDTO;
 import me.mrvaliobg.software.courses.exceptions.NoProfessorException;
+import me.mrvaliobg.software.courses.models.Course;
 import me.mrvaliobg.software.courses.models.Professor;
+import me.mrvaliobg.software.courses.repository.CourseRepository;
 import me.mrvaliobg.software.courses.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,40 +18,45 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 public class ProfessorService {
-    private final ProfessorRepository repository;
+    private final ProfessorRepository professorRepository;
+    private final CourseRepository courseRepository;
     private final DTOConverter dtoConverter;
 
     public ProfessorDTO getProfessorDTOById(long professorId) {
-        return dtoConverter.convertEntityToDTO(repository.findById(professorId).orElseThrow(NoProfessorException::new));
+        return dtoConverter.convertEntityToDTO(professorRepository.findById(professorId).orElseThrow(NoProfessorException::new));
     }
 
     public Professor getProfessorById(long professorId) {
-        return repository.findById(professorId).orElseThrow(NoProfessorException::new);
+        return professorRepository.findById(professorId).orElseThrow(NoProfessorException::new);
     }
 
     public void addProfessor(ProfessorDTO professorDTO) {
-        repository.save(dtoConverter.convertDtoToEntity(professorDTO));
+        professorRepository.save(dtoConverter.convertDtoToEntity(professorDTO));
     }
 
     public void updateProfessor(long id, ProfessorDTO professorDTO) {
-        Professor professor = repository.findById(id).orElseThrow(NoProfessorException::new);
+        Professor professor = professorRepository.findById(id).orElseThrow(NoProfessorException::new);
         professor.setFirstName(professorDTO.getFirstName());
         professor.setFirstName(professorDTO.getLastName());
         professor.setCourses(professorDTO.getCourses());
     }
 
     public Set<CourseDTO> getCourses(long id) {
-        Professor professor = repository.findById(id).orElseThrow(NoProfessorException::new);
+        Professor professor = professorRepository.findById(id).orElseThrow(NoProfessorException::new);
         return professor.getCourses().stream().map(dtoConverter::convertEntityToDTO).collect(Collectors.toSet());
     }
 
     public void deleteProfessor(long id) {
-        if(repository.existsById(id)) {
-            repository.deleteById(id);
-        } else throw new NoProfessorException();
+        Professor professor = professorRepository.findById(id).orElseThrow(NoProfessorException::new);
+        Set<Course> courses = professor.getCourses();
+        for (Course course : courses) {
+            course.setProfessor(null);
+            courseRepository.save(course);
+        }
+        professorRepository.deleteById(id);
     }
 
     public List<ProfessorDTO> getAllProfessors() {
-        return repository.findAll().stream().map(dtoConverter::convertEntityToDTO).collect(Collectors.toList());
+        return professorRepository.findAll().stream().map(dtoConverter::convertEntityToDTO).collect(Collectors.toList());
     }
 }

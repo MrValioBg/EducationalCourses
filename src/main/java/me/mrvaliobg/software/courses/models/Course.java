@@ -31,7 +31,7 @@ public class Course {
     private AttendingType attendingType;
     private Field field;
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Professor professor;
 

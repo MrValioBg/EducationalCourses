@@ -24,7 +24,7 @@ public class Professor {
     private String lastName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "professor")
     private Set<Course> courses;
 
 }
